@@ -13,7 +13,6 @@ export function Footer() {
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center overflow-hidden">
                 <img src="/profile.png" alt="Rupansh" className="w-full h-full object-cover" />
               </div>
-              <span className="font-semibold text-xl tracking-tight">Rupansh.sys</span>
             </Link>
             <p className="text-muted-foreground max-w-sm text-center md:text-left">
               Building production-grade AI automation systems that scale operations and reduce costs.
@@ -46,7 +45,7 @@ export function Footer() {
             <span>Available Worldwide</span>
           </div>
           <p>
-            © {new Date().getFullYear()} Rupansh.sys. All rights reserved.
+            © {new Date().getFullYear()} Rupansh. All rights reserved.
           </p>
         </div>
       </div>
