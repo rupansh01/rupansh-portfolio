@@ -12,10 +12,7 @@ import {
   UserCheck, 
   Video, 
   CheckCircle2,
-  AlertTriangle,
-  Globe2,
-  TrendingUp,
-  LineChart
+  Globe2
 } from "lucide-react";
 
 const pipelineNodes = [
@@ -35,7 +32,7 @@ export function AiPipeline() {
     offset: ["start center", "end center"]
   });
 
-  const pathHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
+
   const splitOpacity = useTransform(scrollYProgress, [0.75, 0.85], [0, 1]);
 
   return (
@@ -188,33 +185,9 @@ export function AiPipeline() {
 
             {/* Flowchart Nodes */}
             <div className="space-y-12 relative z-10">
-              {pipelineNodes.map((node, i) => {
-                const Icon = node.icon;
-                const isAI = node.type === "ai";
-                
-                // Map opacity to scroll so nodes fade in as the line hits them
-                const nodeStart = i * 0.1;
-                const opacity = useTransform(scrollYProgress, [nodeStart, nodeStart + 0.05], [0.3, 1]);
-                const scale = useTransform(scrollYProgress, [nodeStart, nodeStart + 0.05], [0.95, 1]);
-
-                return (
-                  <motion.div key={node.id} style={{ opacity, scale }} className="flex gap-6 items-start">
-                    <div className={`w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center border ${isAI ? 'bg-cyan-950/40 border-cyan-500/40 shadow-[0_0_30px_rgba(0,255,255,0.15)]' : 'bg-amber-950/40 border-amber-500/40 shadow-[0_0_30px_rgba(251,191,36,0.15)]'} backdrop-blur-md bg-[#0D1220]`}>
-                      <Icon className={`w-8 h-8 ${isAI ? 'text-cyan-400' : 'text-amber-400'}`} />
-                    </div>
-                    
-                    <div className="pt-2 flex-1">
-                      <div className="flex flex-wrap items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-white">{node.title}</h3>
-                        <div className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${isAI ? 'text-cyan-400 border-cyan-500/20 bg-cyan-950/50' : 'text-amber-400 border-amber-500/20 bg-amber-950/50'}`}>
-                          {isAI ? 'Automation' : 'Human'}
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground leading-relaxed">{node.desc}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              {pipelineNodes.map((node, i) => (
+                <PipelineNodeItem key={node.id} node={node} i={i} scrollYProgress={scrollYProgress} />
+              ))}
             </div>
           </div>
 
@@ -264,5 +237,33 @@ export function AiPipeline() {
         </div>
       </div>
     </section>
+  );
+}
+
+function PipelineNodeItem({ node, i, scrollYProgress }: { node: { id: number, title: string, desc: string, icon: React.ElementType, type: string }, i: number, scrollYProgress: import("framer-motion").MotionValue<number> }) {
+  const Icon = node.icon;
+  const isAI = node.type === "ai";
+  
+  // Map opacity to scroll so nodes fade in as the line hits them
+  const nodeStart = i * 0.1;
+  const opacity = useTransform(scrollYProgress, [nodeStart, nodeStart + 0.05], [0.3, 1]);
+  const scale = useTransform(scrollYProgress, [nodeStart, nodeStart + 0.05], [0.95, 1]);
+
+  return (
+    <motion.div style={{ opacity, scale }} className="flex gap-6 items-start">
+      <div className={`w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center border ${isAI ? 'bg-cyan-950/40 border-cyan-500/40 shadow-[0_0_30px_rgba(0,255,255,0.15)]' : 'bg-amber-950/40 border-amber-500/40 shadow-[0_0_30px_rgba(251,191,36,0.15)]'} backdrop-blur-md bg-[#0D1220]`}>
+        <Icon className={`w-8 h-8 ${isAI ? 'text-cyan-400' : 'text-amber-400'}`} />
+      </div>
+      
+      <div className="pt-2 flex-1">
+        <div className="flex flex-wrap items-center gap-3 mb-2">
+          <h3 className="text-xl font-bold text-white">{node.title}</h3>
+          <div className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${isAI ? 'text-cyan-400 border-cyan-500/20 bg-cyan-950/50' : 'text-amber-400 border-amber-500/20 bg-amber-950/50'}`}>
+            {isAI ? 'Automation' : 'Human'}
+          </div>
+        </div>
+        <p className="text-muted-foreground leading-relaxed">{node.desc}</p>
+      </div>
+    </motion.div>
   );
 }

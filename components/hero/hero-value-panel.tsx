@@ -59,7 +59,7 @@ export function HeroValuePanel() {
             How My AI Systems Work
           </h2>
           <p className="text-lg text-muted-foreground">
-            I don't just build scripts. I engineer resilient, production-ready AI automation systems that solve complex business operations at scale.
+            I don&apos;t just build scripts. I engineer resilient, production-ready AI automation systems that solve complex business operations at scale.
           </p>
         </div>
 

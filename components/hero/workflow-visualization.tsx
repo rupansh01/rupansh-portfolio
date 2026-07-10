@@ -62,10 +62,10 @@ export function WorkflowVisualization() {
                 opacity: [0, 1, 1, 0]
               }}
               transition={{
-                duration: 2 + Math.random() * 2,
+                duration: 2 + (i % 3) * 0.5,
                 repeat: Infinity,
                 ease: "linear",
-                delay: Math.random() * 2
+                delay: (i % 4) * 0.5
               }}
             />
           </g>

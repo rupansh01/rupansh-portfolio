@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion, useInView } from "framer-motion";
 
 const metrics = [
@@ -26,7 +26,7 @@ export function MetricCards() {
   );
 }
 
-function MetricCard({ metric, index }: { metric: any, index: number }) {
+function MetricCard({ metric, index }: { metric: { value: string, label: string, glow: string, isText?: boolean }, index: number }) {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   

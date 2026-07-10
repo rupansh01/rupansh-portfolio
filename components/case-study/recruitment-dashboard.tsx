@@ -39,7 +39,7 @@ export function RecruitmentDashboard() {
           Production Analytics & LLM Extraction
         </h3>
         <p className="text-muted-foreground text-lg">
-          The visualization below demonstrates an AI pipeline specifically configured for a <strong>Relationship Manager</strong> role, strictly aligning with the hiring team's exact evaluation criteria. While sensitive candidate data has been anonymized, the system's architecture is infinitely scalable and can be instantly adapted to <strong>any hiring domain or industry</strong>.
+          The visualization below demonstrates an AI pipeline specifically configured for a <strong>Relationship Manager</strong> role, strictly aligning with the hiring team&apos;s exact evaluation criteria. While sensitive candidate data has been anonymized, the system&apos;s architecture is infinitely scalable and can be instantly adapted to <strong>any hiring domain or industry</strong>.
         </p>
       </div>
 

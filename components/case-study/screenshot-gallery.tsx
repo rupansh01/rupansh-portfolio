@@ -9,18 +9,41 @@ export function ScreenshotGallery({ project }: { project: Project }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (project.gallery && project.gallery.length > 0) {
+        if (e.key === 'ArrowRight') setCurrentIndex((prev) => (prev + 1) % project.gallery!.length);
+        if (e.key === 'ArrowLeft') setCurrentIndex((prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [lightboxOpen, project.gallery]);
+
   if (project.locked || !project.gallery || project.gallery.length === 0) return null;
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
     setLightboxOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    document.body.style.overflow = 'auto';
-  };
+
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -31,17 +54,6 @@ export function ScreenshotGallery({ project }: { project: Project }) {
     e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length);
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!lightboxOpen) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') setCurrentIndex((prev) => (prev + 1) % project.gallery!.length);
-      if (e.key === 'ArrowLeft') setCurrentIndex((prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, project.gallery]);
 
   return (
     <section className="py-24 border-t border-white/5">

@@ -82,7 +82,7 @@ export function Navbar() {
           </a>
           <a href="mailto:rrupanshkumar@gmail.com">
             <Button variant="premium" className="rounded-full px-6">
-              Let's Work Together
+              Let&apos;s Work Together
               </Button>
             </a>
           </div>
