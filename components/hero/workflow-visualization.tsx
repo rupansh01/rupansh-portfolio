@@ -40,7 +40,7 @@ export function WorkflowVisualization() {
 
       {/* Connecting SVG Lines */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-        {nodes.map((node) => (
+        {nodes.map((node, i) => (
           <g key={`line-${node.id}`}>
             {/* Base geometric line */}
             <line 
