@@ -194,11 +194,16 @@ export function AiPipeline() {
           {/* The Split Branch (Hireflix vs Human) */}
           <motion.div style={{ opacity: splitOpacity }} className="mt-4 flex flex-col md:flex-row gap-8 relative pt-12">
             
-            {/* Elegant curved SVG lines for branching (Desktop) */}
-            <svg className="absolute top-0 left-0 w-full h-12 hidden md:block" preserveAspectRatio="none">
-              <path d="M 40 0 L 40 10 Q 40 24 54 24 L calc(25% - 14px) 24 Q 25% 24 25% 38 L 25% 48" fill="none" stroke="rgba(239, 68, 68, 0.4)" strokeWidth="2" strokeDasharray="4 4" className="path-red" />
-              <path d="M 40 0 L 40 10 Q 40 24 54 24 L calc(75% - 14px) 24 Q 75% 24 75% 38 L 75% 48" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="2" strokeDasharray="4 4" className="path-amber" />
-            </svg>
+            {/* Elegant curved CSS lines for branching (Desktop) */}
+            <div className="absolute top-0 left-0 w-full h-12 hidden md:block z-0 pointer-events-none">
+              {/* Path to Hireflix (Red) */}
+              <div className="absolute left-[39px] top-0 w-[calc(25%-39px)] h-6 border-l-2 border-b-2 border-red-500/40 rounded-bl-xl border-dashed" />
+              <div className="absolute left-[calc(25%-1px)] top-6 w-[2px] h-6 border-l-2 border-red-500/40 border-dashed" />
+              
+              {/* Path to Human (Amber) */}
+              <div className="absolute left-[39px] top-0 w-[calc(75%-39px)] h-6 border-l-2 border-b-2 border-amber-500/40 rounded-bl-xl border-dashed" />
+              <div className="absolute left-[calc(75%-1px)] top-6 w-[2px] h-6 border-l-2 border-amber-500/40 border-dashed" />
+            </div>
 
             {/* Path A: Hireflix (Failure) */}
             <div className="flex-1 glass-card p-6 rounded-3xl border border-red-500/30 bg-red-950/10 shadow-[0_0_30px_rgba(239,68,68,0.05)] relative z-10 md:mt-0">
