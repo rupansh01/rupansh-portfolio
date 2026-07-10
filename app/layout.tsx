@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className={cn(inter.className, "noise-bg antialiased min-h-screen bg-background text-foreground flex flex-col")}>
+      <body className={cn(inter.className, "noise-bg antialiased min-h-screen bg-background text-foreground flex flex-col overflow-x-hidden w-full")}>
         {children}
       </body>
     </html>
